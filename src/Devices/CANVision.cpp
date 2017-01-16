@@ -5,7 +5,8 @@
 #include <Devices/CANVision.h>
 
 CANVision::CANVision (int deviceNumber)
-: m_deviceNumber(deviceNumber)
+: vision(deviceNumber)
+, m_deviceNumber(deviceNumber)
 , m_tracking(false)
 , m_table(nullptr)
 {
@@ -39,7 +40,13 @@ CANVision::Confidence CANVision::GetConfidence() const
 
 int CANVision::GetDistanceInches() const
 {
-  return 27;  // todo: actually get the distance
+  int32_t distance;
+
+  CTR_Code code = vision.GetDistance(&distance);
+  if (code) {
+    wpi_setErrorWithContext(code, "Vision.GetDistance failed.");
+  }
+  return distance;
 }
 
 // LiveWindow Methods

@@ -9,6 +9,10 @@
 #include "LiveWindow/LiveWindowSendable.h"
 #include "tables/ITableListener.h"
 
+#include "CANPiVision.h"
+
+// todo: Is there an abstract class here? Not for now.
+
 class CANVision
 : public frc::ErrorBase
 , public frc::LiveWindowSendable
@@ -46,6 +50,7 @@ public:
   std::shared_ptr<ITable> GetTable() const override;
 
 private:
+  CANPiVision vision;
   int m_deviceNumber;
   bool m_tracking;
   std::shared_ptr<ITable> m_table;
