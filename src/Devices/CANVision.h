@@ -5,7 +5,14 @@
 #ifndef SRC_DEVICES_CANVISION_H_
 #define SRC_DEVICES_CANVISION_H_
 
+#include "ErrorBase.h"
+#include "LiveWindow/LiveWindowSendable.h"
+#include "tables/ITableListener.h"
+
 class CANVision
+: public frc::ErrorBase
+, public frc::LiveWindowSendable
+, public ITableListener
 {
 public:
   explicit CANVision(int deviceNumber);
@@ -13,6 +20,7 @@ public:
 
   void EnableTracking();
   void DisableTracking();
+  bool IsTrackingEnabled() const;
 
   enum Confidence {
       kConfidenceLow = 0    // What target? I don't see a target.
@@ -26,8 +34,21 @@ public:
   Confidence GetConfidence() const;
   int GetDistanceInches() const;
 
+
+  // Support LiveWindow.
+  void ValueChanged(ITable* source, llvm::StringRef key,
+                    std::shared_ptr<nt::Value> value, bool isNew) override;
+  void UpdateTable() override;
+  void StartLiveWindowMode() override;
+  void StopLiveWindowMode() override;
+  std::string GetSmartDashboardType() const override;
+  void InitTable(std::shared_ptr<ITable> subTable) override;
+  std::shared_ptr<ITable> GetTable() const override;
+
 private:
   int m_deviceNumber;
+  bool m_tracking;
+  std::shared_ptr<ITable> m_table;
 };
 
 #endif /* SRC_DEVICES_CANVISION_H_ */
