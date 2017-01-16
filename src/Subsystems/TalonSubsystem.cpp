@@ -5,7 +5,8 @@ std::unique_ptr<TalonSubsystem> TalonSubsystem::self;
 
 TalonSubsystem::TalonSubsystem()
 : Subsystem("TalonSubsystem")
-, talon(kTalonID) {
+, talon(kTalonID)
+, vision(kVisionID ){
 
 }
 

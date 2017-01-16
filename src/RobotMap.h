@@ -19,5 +19,6 @@
 // constexpr int RANGE_FINDER_MODULE = 1;
 
 constexpr int kTalonID = 10;
+constexpr int kVisionID = 20;
 
 #endif  // ROBOTMAP_H
