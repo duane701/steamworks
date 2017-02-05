@@ -10,6 +10,7 @@
 #include "Commands/ExampleCommand.h"
 
 #include "Subsystems/TalonSubsystem.h"
+#include "Subsystems/VisionSubsystem.h"
 
 class Robot: public frc::IterativeRobot {
 public:
@@ -19,6 +20,7 @@ public:
 		frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
 		TalonSubsystem::getInstance();
+		VisionSubsystem::getInstance();
 	}
 
 	/**
@@ -81,6 +83,8 @@ public:
 
 	void TestPeriodic() override {
 		frc::LiveWindow::GetInstance()->Run();
+
+	  SmartDashboard::PutNumber("Vision Distance.", VisionSubsystem::getInstance()->GetDistanceInches());
 	}
 
 private:
