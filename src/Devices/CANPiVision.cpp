@@ -7,12 +7,14 @@
 #include "ctre/CtreCanNode.h"
 #include "FRC_NetworkCommunication/CANSessionMux.h"  //CAN Communication
 
-static const uint32_t kCANPiVisionArbitrationID = 0x07011400;
+static const uint32_t kCANPiVisionArbitrationID = 0x05011400;
 // More IDs to use for other commands
 // 0x07011440
 // 0x07011480
 // 0x070114C0
 // 0x07011500
+
+// 0x0204000A
 
 static const uint32_t kExpectedResponseTimeoutMillis = 50;
 
