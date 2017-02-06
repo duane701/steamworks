@@ -79,12 +79,12 @@ public:
 
 	void TeleopPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
+
+    SmartDashboard::PutNumber("Vision Distance.", VisionSubsystem::getInstance()->GetDistanceInches());
 	}
 
 	void TestPeriodic() override {
 		frc::LiveWindow::GetInstance()->Run();
-
-	  SmartDashboard::PutNumber("Vision Distance.", VisionSubsystem::getInstance()->GetDistanceInches());
 	}
 
 private:
